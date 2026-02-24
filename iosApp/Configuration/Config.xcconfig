@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=posthog-kmp
+PRODUCT_BUNDLE_IDENTIFIER=com.parsomash.kmp.posthog.posthog-kmp$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
