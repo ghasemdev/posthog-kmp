@@ -35,7 +35,12 @@ fun App() {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Button(onClick = { showContent = !showContent }) {
+            Button(
+                onClick = {
+                    posthogCapture("Click me!")
+                    showContent = !showContent
+                },
+            ) {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
@@ -51,3 +56,5 @@ fun App() {
         }
     }
 }
+
+expect fun posthogCapture(event: String)

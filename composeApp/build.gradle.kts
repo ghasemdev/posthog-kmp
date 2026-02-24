@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalSpmForKmpFeature::class)
+
+import io.github.frankois944.spmForKmp.swiftPackageConfig
+import io.github.frankois944.spmForKmp.utils.ExperimentalSpmForKmpFeature
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -5,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.spmForKmp)
 }
 
 kotlin {
@@ -31,6 +36,18 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+        }
+        iosTarget.swiftPackageConfig(cinteropName = "nativeBridge") {
+            minIos = "13"
+            dependency {
+                remotePackageVersion(
+                    url = uri("https://github.com/PostHog/posthog-ios.git"),
+                    products = {
+                        add("PostHog", exportToKotlin = true)
+                    },
+                    version = libs.versions.postHogIOS.get(),
+                )
+            }
         }
     }
 
